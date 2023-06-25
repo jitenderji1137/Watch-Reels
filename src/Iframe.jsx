@@ -1,13 +1,43 @@
-import React from 'react';
-
+import React,{useEffect, useState} from 'react';
+import axios from 'axios';
 const Iframe = () => {
+    const [videoarr,videoarrvalue] = useState([]);
+    const [count,countvalue] = useState(0);
+    function getdata(){
+        axios.post('https://api.chingari.io/post/trending-video-current?skip=0&limit=10')
+        .then(function (response) {
+            const arrrr = response.data.data.TrendingFeedData;
+            let ar = [];
+            for (const iterator of arrrr) {
+                const ardata = iterator.mediaLocation.transcoded;
+                if(ardata!==undefined){
+                    ar.push(ardata.p1024);
+                }
+            }
+            videoarrvalue(ar);
+        })
+    }
+    useEffect(()=>{
+        getdata();
+    },[]);
     return (
-    <iframe
-        src="https://media.chingari.io/uploads/648fdf1a08ea789c6dfe2d56/transcode/720p/h264_720p26cbc1bc-f75e-4160-a722-828bff479c69-1687150343171-TXVideo_20230619_102208.mp4"
-        title="Embedded Content"
-        style={{position: 'absolute',top: 0,left: 0,width: '100%',height: '100%',border: 0,}}
-        allowFullScreen
-    />
+        <>
+        <iframe
+            id="video-player"
+            src={`https://media.chingari.io${videoarr[count]}`}
+            title="Embedded Content"
+            style={{position: 'absolute',top: 0,left: 0,width: '100%',height: '100%',border: 0,}}
+            allowFullScreen
+        />
+        <button style={{position:"absolute",top:"0"}} onClick={()=>{
+            countvalue(count+1);
+            if(videoarr.length-2 === count){
+                getdata();
+                countvalue(0);
+            }
+            }}>Next video</button>
+        </>
+    
 );
 };
 
