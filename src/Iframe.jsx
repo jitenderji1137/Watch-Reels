@@ -4,7 +4,7 @@ const Iframe = () => {
     const [videoarr,videoarrvalue] = useState([]);
     const [count,countvalue] = useState(0);
     function getdata(){
-        axios.post('https://api.chingari.io/post/trending-video-current?skip=0&limit=10')
+        axios.post('https://api.chingari.io/post/trending-video-current?skip=0&limit=10&language=english')
         .then(function (response) {
             const arrrr = response.data.data.TrendingFeedData;
             let ar = [];
@@ -23,11 +23,12 @@ const Iframe = () => {
     return (
         <>
         <iframe
-            id="video-player"
-            src={`https://media.chingari.io${videoarr[count]}`}
+            src={`https://media.chingari.io${videoarr[count]}?autoplay=1&loop=1`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             title="Embedded Content"
             style={{position: 'absolute',top: 0,left: 0,width: '100%',height: '100%',border: 0,}}
             allowFullScreen
+            loop
         />
         <button style={{position:"absolute",top:"0"}} onClick={()=>{
             countvalue(count+1);
