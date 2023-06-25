@@ -15,7 +15,7 @@ const Iframe = () => {
                     ar.push(ardata.p1024);
                 }
             }
-            videoarrvalue(...videoarr,ar);
+            videoarrvalue(...videoarr,...ar);
         })
     }
     useEffect(()=>{
