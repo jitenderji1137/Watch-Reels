@@ -27,20 +27,6 @@ const Iframe = () => {
             getdata();
             countvalue(0);
         }
-      };
-    const divStyle = {
-        position: 'relative',
-        width: '100%',
-        paddingBottom: '56.25%', // 16:9 aspect ratio
-        backgroundColor: '#000', // Optional: Set a background color
-    };
-    
-    const contentStyle = {
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
     };
     return (
         <>
@@ -52,13 +38,9 @@ const Iframe = () => {
             allowFullScreen
             loop
         /> */}
-        <div style={divStyle}>
-            <div style={contentStyle}>
-                <ReactPlayer width="100%" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>    
-            </div>
-        </div>
-        <button style={{position:"absolute",top:"0",background:"transparent",width:"100vw",height:"50vh",border: "none"}} onClick={()=>{if(count>0){countvalue(count-1);}}}></button>
-        <button style={{position:"absolute",bottom:"0",background:"transparent",width:"100vw",height:"50vh",border: "none"}} onClick={handlestate}></button>
+        <ReactPlayer width="100%" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>    
+        <button style={{position:"absolute",top:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={()=>{if(count>0){countvalue(count-1);}}}></button>
+        <button style={{position:"absolute",bottom:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={handlestate}></button>
         </>
     
 );
