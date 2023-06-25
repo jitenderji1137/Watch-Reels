@@ -15,7 +15,7 @@ const Iframe = () => {
                     ar.push(ardata.p1024);
                 }
             }
-            videoarrvalue(ar);
+            videoarrvalue(...videoarr,ar);
         })
     }
     useEffect(()=>{
@@ -25,19 +25,10 @@ const Iframe = () => {
         countvalue(count+1);
         if(videoarr.length-2 === count){
             getdata();
-            countvalue(0);
         }
     };
     return (
         <>
-        {/* <iframe
-            src={`https://media.chingari.io${videoarr[count]}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            title="Embedded Content"
-            style={{position: 'absolute',top: 0,left: 0,width: '100%',height: '100%',border: 0,}}
-            allowFullScreen
-            loop
-        /> */}
         <ReactPlayer width="100%" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>    
         <button style={{position:"absolute",top:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={()=>{if(count>0){countvalue(count-1);}}}></button>
         <button style={{position:"absolute",bottom:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={handlestate}></button>
