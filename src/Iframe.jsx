@@ -32,7 +32,7 @@ const Iframe = () => {
     };
     return (
         <>
-        {count>0?
+        {count>=0?
         <ReactPlayer width="100%" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>:<></>}  
         <button style={{position:"absolute",top:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={()=>{if(count>0){countvalue(count-1);}}}></button>
         <button style={{position:"absolute",bottom:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent"}} onClick={handlestate}></button>
