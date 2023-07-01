@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player'
 const Iframe = () => {
     const [videoarr,videoarrvalue] = useState([]);
     const [count,countvalue] = useState(0);
-    const [vall,vvalvalue] = useState(true);
+    // const [vall,vvalvalue] = useState(true);
     function getdata(){
         axios.post('https://api.chingari.io/post/trending-video-current?skip=0&limit=10&language=english')
         .then(function (response) {
@@ -16,24 +16,38 @@ const Iframe = () => {
                     ar.push(ardata.p1024);
                 }
             }
+            console.log(ar)
             videoarrvalue([...videoarr,...ar]);
         })
     }
     useEffect(() => {
         getdata();
-    }, []);
+    },[]);
     const handlestate = () => {
         countvalue(count+1);
         if(videoarr.length-2 === count){
             getdata();
         }
     };
+    const bstyle = {
+        backgroundColor: "rgba(255, 0, 0, 0)",
+        position: "absolute",
+        height: "90%",
+        cursor: "pointer",
+        width: "30%",
+        fontSize: "5rem",
+        fontWeight: "bolder",
+        color: "rgb(128 128 128 / 21%)",
+        outline:"none",
+        border: 0,
+        top: 0,
+    }
         return (
         <>
         {count>=0?
-        <ReactPlayer width="100%" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>:<></>}  
-        <button style={{position:"absolute",top:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent",outline:"none"}} onClick={()=>{if(count>0){countvalue(count-1);}}}></button>
-        <button style={{position:"absolute",bottom:"0",background:"transparent",width:"100vw",height:"50vh",border: "none",borderColor:"transparent",outline:"none"}} onClick={handlestate}></button>
+        <ReactPlayer width="100vw" height="100vh" muted={false} playing={true} loop={true} url={`https://media.chingari.io${videoarr[count]}`}/>:<></>}  
+        <button style={{...bstyle, left: 0}} onClick={()=>{if(count>0){countvalue(count-1);}}}>&#10094;&#10094;</button>
+        <button style={{...bstyle, right: 0}} onClick={handlestate}>&#10095;&#10095;</button>
         </>
     
 );
